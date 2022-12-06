@@ -49,11 +49,11 @@ do
             {
                 Console.WriteLine($"    {player.Name} : {player.Score} points");
             }
+
+            Console.WriteLine("Appuyez sur n'importe quelle touche pour quitter le jeu.");
+            Console.ReadKey();
         }
     }
 } while (play);
-
-
-
 
 return;
