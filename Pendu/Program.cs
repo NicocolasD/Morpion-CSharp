@@ -3,9 +3,9 @@ using Pendu.Enum;
 using Pendu.Utilities;
 using System.Collections;
 
-Console.Title = "Morpion";
+Console.Title = "Pendu";
 
-Console.WriteLine("Bienvenue dans le morpion");
+Console.WriteLine("Bienvenue dans le pendu");
 List<Player> players = Functions.SetPlayers();
 Player player1 = players[0];
 Player player2 = players[1];
@@ -16,3 +16,6 @@ if (Console.ReadKey().Key == ConsoleKey.N)
 
 Difficulties difficulty = Functions.SetDifficulty();
 
+string word = Functions.ChooseWord();
+
+return;

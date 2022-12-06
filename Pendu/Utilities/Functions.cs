@@ -75,5 +75,17 @@ namespace Pendu.Utilities
         }
 
         #endregion
+
+        #region File
+
+        public static string ChooseWord()
+        {
+            string[] words = File.ReadAllLines("C:\\DEV\\COURS_C#\\Pendu\\Pendu\\mots.txt");
+            Random random = new();
+            int number = random.Next(0, words.Length);
+            return words[number];
+        }
+
+        #endregion
     }
 }
