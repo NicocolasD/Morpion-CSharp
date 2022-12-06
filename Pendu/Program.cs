@@ -18,4 +18,7 @@ Difficulties difficulty = Functions.SetDifficulty();
 
 string word = Functions.ChooseWord();
 
+Game game = new(word, difficulty);
+game.Play(word);
+
 return;
