@@ -1,4 +1,5 @@
 ﻿using Pendu.Enum;
+using Pendu.Library;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,19 +15,29 @@ namespace Pendu.Utilities
         public List<char> UsedLetters { get; set; }
         public int Attempts { get; set; }
         public Difficulties Difficulty { get; set; } = Difficulties.NotSet;
+        public List<Player> Players { get; set; }
 
-        public Game(string hiddenWord, Difficulties difficulty)
+        public Game(Difficulties difficulty, List<Player> players)
         {
-            HiddenWord = hiddenWord;
+            HiddenWord = string.Empty;
             Difficulty = difficulty;
             UsedLetters = new List<char>();
-            Attempts = 10;
+            Players = players;
         }
 
-        public void Play(string word)
+        private void ResetGame()
         {
-            Console.WriteLine(this.HiddenWord);
+            this.Attempts = 10;
+            this.UsedLetters = new List<char>();
+        }
 
+        public bool Play(string word, string playerName)
+        {
+            ResetGame();
+            Console.Clear();
+            Console.WriteLine($"C'est au tour de {playerName} de jouer");
+
+            bool win = false;
             bool game = true;
             int time = GetTimeByDifficulty();
 
@@ -37,7 +48,7 @@ namespace Pendu.Utilities
 
                 this.HiddenWord = InitEtoile(word);
 
-                while(this.Attempts >= 1)
+                while (this.Attempts >= 1)
                 {
                     char letter = Console.ReadKey().KeyChar;
                     this.UsedLetters.Add(letter);
@@ -64,6 +75,7 @@ namespace Pendu.Utilities
                         PrintPendu();
                         Console.WriteLine($"Bravo vous avez gagné ! \nLe mot secret était : {this.HiddenWord}.");
                         this.Attempts = 0;
+                        win = true;
 
                         sw.Stop();
                         Console.WriteLine($"Votre partie a durée {sw.ElapsedMilliseconds / 1000} secondes.");
@@ -72,23 +84,10 @@ namespace Pendu.Utilities
 
                     PrintPendu();
                 }
-
-                bool response = false;
-                while (!response)
-                {
-                    Console.WriteLine("Voulez-vous rejouer ? (y/n)");
-                    if (Console.ReadKey().Key == ConsoleKey.Y)
-                        response = true;
-                    else if (Console.ReadKey().Key == ConsoleKey.N)
-                    {
-                        response = true;
-                        game = false;
-                    }
-
-                    Console.Clear();
-                }
+                game = false;
             }
-            return;
+
+            return win;
         }
 
         private string InitEtoile(string word)
@@ -237,7 +236,12 @@ namespace Pendu.Utilities
                 "	\n\n   ";
 
             Console.Clear();
-            Console.WriteLine($"Lettres utilisées : ");
+            Console.WriteLine("Score :");
+            foreach (Player player in this.Players)
+            {
+                Console.WriteLine($"    {player.Name} : {player.Score} points");
+            }
+            Console.WriteLine($"\nLettres utilisées : ");
             foreach (char letter in this.UsedLetters)
             {
                 Console.Write(letter);

@@ -29,6 +29,7 @@ namespace Pendu.Utilities
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.NumPad1:
+                        Console.Clear();
                         Console.WriteLine("Etes-vous sûr de vouloir choisir le mode facile ? (y/n)");
                         if (Console.ReadKey().Key == ConsoleKey.Y)
                         {
@@ -36,6 +37,7 @@ namespace Pendu.Utilities
                         }
                         break;
                     case ConsoleKey.NumPad2:
+                        Console.Clear();
                         Console.WriteLine("Etes-vous sûr de vouloir choisir le mode moyen ? (y/n)");
                         if (Console.ReadKey().Key == ConsoleKey.Y)
                         {
@@ -43,6 +45,7 @@ namespace Pendu.Utilities
                         }
                         break;
                     case ConsoleKey.NumPad3:
+                        Console.Clear();
                         Console.WriteLine("Etes-vous sûr de vouloir choisir le mode difficile ? (y/n)");
                         if (Console.ReadKey().Key == ConsoleKey.Y)
                         {

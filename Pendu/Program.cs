@@ -16,9 +16,44 @@ if (Console.ReadKey().Key == ConsoleKey.N)
 
 Difficulties difficulty = Functions.SetDifficulty();
 
-string word = Functions.ChooseWord();
+bool play = true;
+do
+{
+    Game game = new(difficulty, players);
+    foreach (Player player in players)
+    {
+        string word = Functions.ChooseWord();
+        bool win = game.Play(word, player.Name);
+        if (win)
+            player.AddPoint();
+        Console.WriteLine("Appuyez sur espace pour continuer.");
+        if (Console.ReadKey().Key == ConsoleKey.Spacebar)
+            continue;
+    }
 
-Game game = new(word, difficulty);
-game.Play(word);
+    bool response = false;
+    while (!response)
+    {
+        Console.Clear();
+        Console.WriteLine("Voulez-vous rejouer ? (y/n)");
+        ConsoleKey key = Console.ReadKey().Key;
+        if (key == ConsoleKey.Y)
+            response = true;
+        else if (key == ConsoleKey.N)
+        {
+            response = true;
+            play = false;
+            Console.Clear();
+            Console.WriteLine("Score :");
+            foreach (Player player in players)
+            {
+                Console.WriteLine($"    {player.Name} : {player.Score} points");
+            }
+        }
+    }
+} while (play);
+
+
+
 
 return;
