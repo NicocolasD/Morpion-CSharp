@@ -1,16 +1,16 @@
 ﻿using Pendu.Library;
 using Pendu.Enum;
 using Pendu.Utilities;
+using System.Collections;
 
 Console.Title = "Morpion";
 
 Console.WriteLine("Bienvenue dans le morpion");
-Console.WriteLine("\nSaisissez le nom du joueur 1 : ");
-Player player1 = new (Console.ReadLine());
-Console.WriteLine("\nSaisissez le nom du joueur 2 : ");
-Player player2 = new(Console.ReadLine());
+List<Player> players = Functions.SetPlayers();
+Player player1 = players[0];
+Player player2 = players[1];
 
-Console.WriteLine($"\n{player1.Name} va affronter {player2.Name}, confirmer ? (y/n)");
+Console.WriteLine($"{player1.Name} va affronter {player2.Name}, confirmer ? (y/n)");
 if (Console.ReadKey().Key == ConsoleKey.N)
     return;
 

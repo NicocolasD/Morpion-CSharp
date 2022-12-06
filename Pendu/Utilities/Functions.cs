@@ -1,5 +1,7 @@
 ﻿using Pendu.Enum;
+using Pendu.Library;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,16 +11,18 @@ namespace Pendu.Utilities
 {
     internal class Functions
     {
-        private static void Writehoices()
+        #region Difficulty 
+
+        private static void WriteDifficultyChoices()
         {
             Console.Clear();
             Console.WriteLine("Choix de la difficulté : ");
             Console.WriteLine($"1 : {Difficulties.Easy} \n2 : {Difficulties.Medium} \n3 : {Difficulties.Difficult}");
         }
 
-        internal static Difficulties SetDifficulty()
+        public static Difficulties SetDifficulty()
         {
-            Writehoices();
+            WriteDifficultyChoices();
             Difficulties difficulty = Difficulties.NotSet;
             do
             {
@@ -46,12 +50,30 @@ namespace Pendu.Utilities
                         }
                         break;
                     default:
-                        Writehoices();
+                        WriteDifficultyChoices();
                         break;
                 }
             } while (difficulty == Difficulties.NotSet);
             Console.Clear();
             return difficulty;
         }
+
+        #endregion
+
+        #region Players
+
+        public static List<Player> SetPlayers()
+        {
+            List<Player> players = new();
+            for (int i = 1; i < 3; i++)
+            {
+                Console.WriteLine($"\nSaisissez le nom pour le joeur {i} : ");
+                players.Add(new Player(Console.ReadLine()));
+            }
+            Console.Clear();
+            return players;
+        }
+
+        #endregion
     }
 }
